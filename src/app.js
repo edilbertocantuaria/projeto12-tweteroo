@@ -1,12 +1,13 @@
-import express, { json } from 'express';
+import express from 'express';
 import cors from 'cors';
+import chalk from "chalk"
 
-const server = express();
-server.use(cors());
-server.use(json());
+const app = express();
+app.use(express.json());
+app.use(cors())
 
 
 const PORT = 5000;
-server.listen(PORT, () => {
-    console.log(`Rodando em http://localhost:${PORT}`);
+app.listen(PORT, () => {
+    console.log(chalk.blue(`Rodando em http://localhost:${PORT}`));
 });
