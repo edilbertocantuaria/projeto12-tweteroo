@@ -6,8 +6,12 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
+const user =[]; // {username, avatar}
+const tweet=[]; //{username, tweet}
+
+
 
 const PORT = 5000;
 app.listen(PORT, () => {
-    console.log(chalk.blue(`Rodando em http://localhost:${PORT}`));
+    console.log(chalk.green(`Rodando em http://localhost:${PORT}`));
 });
