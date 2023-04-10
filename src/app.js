@@ -14,7 +14,7 @@ app.post("/sign-up", (req, res) => {
     //const { username, avatar } = req.body;
     const user = req.body;
 
-    if (!user.username.trim() || !user. avatar.trim()) {
+    if (!user.username.trim() || !user.avatar.trim()) {
         res.status(400).send("Todos os campos são obrigatórios!");
         return;
     }
@@ -28,25 +28,48 @@ app.post("/sign-up", (req, res) => {
 app.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
 
-    //console.log(req.body.username)
+    const loggedUser = users.find((user) => user.username === username)
 
     if (!username.trim() || !tweet.trim()) {
         res.status(400).send("Todos os campos são obrigatórios!");;
         return;
     }
 
-
-
-    if (!users.find(user => user.username === username)) {
+    if (!loggedUser) {
         res.status(401).send("UNAUTHORIZED");
         return;
     }
+    /*if (!users.find(user => user.username === username)) {
+        res.status(401).send("UNAUTHORIZED");
+        return;
+    }*/
 
-    tweets.push(req.body)
+    const newTweet = {
+        username,
+        avatar: loggedUser.avatar,
+        tweet
+    }
+    console.log(newTweet);
+
+    //tweets.push(req.body)
+    tweets.push(newTweet);
     res.status(201).send("OK")
 })
 
-app.get("/tweet", (req, res) => { })
+app.get("/tweets", (req, res) => {
+
+    if (tweets.length < 10) {
+        res.send(tweets);
+        return;
+    } else {
+        const selectecTweets = [];
+        for (let i = tweets.length; i > tweets.length - 10; i--) {
+            selectecTweets.push(tweets[i - 1])
+        }
+        res.send(selectecTweets);
+    }
+
+})
 
 
 const PORT = 5000;
