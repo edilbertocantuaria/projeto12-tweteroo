@@ -59,14 +59,14 @@ app.post("/tweets", (req, res) => {
 app.get("/tweets", (req, res) => {
 
     if (tweets.length < 10) {
-        res.send(tweets);
+        res.status(200).send(tweets);
         return;
     } else {
         const selectecTweets = [];
         for (let i = tweets.length; i > tweets.length - 10; i--) {
             selectecTweets.push(tweets[i - 1])
         }
-        res.send(selectecTweets);
+        res.status(200).send(selectecTweets);
     }
 
 })
