@@ -6,19 +6,9 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
-const users = [{
-    username: "bobesponja",
-    avatar: "https://cdn.shopify.com/s/files/1/0150/0643/3380/files/Screen_Shot_2019-07-01_at_11.35.42_AM_370x230@2x.png"
-}
-]; // {username, avatar}
+const users = []; // {username, avatar}
 
-const tweets = [
-    {
-        username: "bobesponja",
-      tweet: "Eu amo o lulamolusco!"
-    }
-
-]; //{username, tweet}
+const tweets = []; //{username, tweet}
 
 app.post("/sign-up", (req, res) => {
     const { username, avatar } = req.body;
@@ -47,8 +37,6 @@ app.post("/tweet", (req, res) => {
         res.status(401).send("UNAUTHORIZED");
         return;
     }
-
-
 
     tweets.push(req.body)
     res.status(201).send("OK")
