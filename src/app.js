@@ -11,10 +11,11 @@ const users = []; // {username, avatar}
 const tweets = []; //{username, tweet}
 
 app.post("/sign-up", (req, res) => {
-    const { username, avatar } = req.body;
+    //const { username, avatar } = req.body;
+    const user = req.body;
 
-    if (!username.trim() || !avatar.trim()) {
-        res.status(400).send("Todos os campos são obrigatórios!");;
+    if (!user.username.trim() || !user. avatar.trim()) {
+        res.status(400).send("Todos os campos são obrigatórios!");
         return;
     }
 
@@ -24,14 +25,17 @@ app.post("/sign-up", (req, res) => {
 
 })
 
-app.post("/tweet", (req, res) => {
+app.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
+
     //console.log(req.body.username)
 
     if (!username.trim() || !tweet.trim()) {
         res.status(400).send("Todos os campos são obrigatórios!");;
         return;
     }
+
+
 
     if (!users.find(user => user.username === username)) {
         res.status(401).send("UNAUTHORIZED");
