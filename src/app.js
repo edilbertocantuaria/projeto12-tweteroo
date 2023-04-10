@@ -39,20 +39,16 @@ app.post("/tweets", (req, res) => {
         res.status(401).send("UNAUTHORIZED");
         return;
     }
-    /*if (!users.find(user => user.username === username)) {
-        res.status(401).send("UNAUTHORIZED");
-        return;
-    }*/
 
     const newTweet = {
         username,
         avatar: loggedUser.avatar,
         tweet
     }
-    console.log(newTweet);
 
-    //tweets.push(req.body)
     tweets.push(newTweet);
+    //tweets.push(req.body);
+
     res.status(201).send("OK")
 })
 
